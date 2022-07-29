@@ -5,8 +5,10 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.w3c.dom.Text;
 
 import javax.persistence.*;
+import javax.websocket.Decoder;
 
 @Entity
 @Getter
@@ -18,8 +20,9 @@ public class Blog {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  Long id;
     @NotNull
-    @Column(name = "TEKST")
-    private String tekst;
+    @Lob
+    @Column(columnDefinition = "TEXT")
+    private String text;
     @ManyToOne
     private User user;
 }
