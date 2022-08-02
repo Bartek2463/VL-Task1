@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import javax.persistence.*;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -34,4 +36,8 @@ public class User {
     @Size(max = 45)
     @Column(name = "READ_ONLY")
     private String readOnly;
+
+
+    @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH,mappedBy = "user")
+    private Set<Blog> blogs = new HashSet<>();
 }

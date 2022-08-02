@@ -1,0 +1,21 @@
+### Get all blog
+GET http://localhost:8080/blog
+
+
+###Get Add blog
+GET http://localhost:8080/blog/add
+
+
+### Add blog for User
+POST http://localhost:8080/blog
+Accept: application/json
+Content-Type: application/json
+
+{
+  "id": null,
+  "text": "testtekst",
+  "user_id": 3
+}
+
+###
+DELETE http://localhost:8080/blog/1
