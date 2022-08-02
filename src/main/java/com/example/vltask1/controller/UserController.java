@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -23,18 +24,24 @@ public class UserController {
     private UserService userService;
 
     @GetMapping
-    public List<User> getUsers(){
+    public List<User> getUsers() {
         return userService.getAllUser();
     }
 
     @PostMapping
-    public ResponseEntity addUser(@Valid User user){
+    public ResponseEntity addUser(@Valid User user) {
         userService.addUser(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @GetMapping("/{id}")
+    public User getUserByid(@PathVariable Long id) {
+        return userService.getUserAbutId(id);
+    }
 
-
-
-
+    @PostMapping("/{id}")
+    public ResponseEntity deleteByid(Long id) {
+        userService.deleteUserByid(id);
+        return new ResponseEntity(HttpStatus.CREATED);
+    }
 }
