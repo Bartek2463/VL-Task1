@@ -7,10 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.net.http.HttpResponse;
@@ -23,13 +20,13 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/all")
     public List<User> getUsers() {
         return userService.getAllUser();
     }
 
     @PostMapping
-    public ResponseEntity addUser(@Valid User user) {
+    public ResponseEntity addUser(@RequestBody @Valid User user) {
         userService.addUser(user);
         return new ResponseEntity(HttpStatus.CREATED);
     }
@@ -39,8 +36,8 @@ public class UserController {
         return userService.getUserAbutId(id);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity deleteByid(Long id) {
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteByid(@PathVariable Long id) {
         userService.deleteUserByid(id);
         return new ResponseEntity(HttpStatus.CREATED);
     }
