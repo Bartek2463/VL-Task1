@@ -40,4 +40,9 @@ public class BlogController {
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
+    @PostMapping("/{id}")
+    public ResponseEntity deleteBlog(Long id){
+       blogService.deleteBlogById(id);
+       return new ResponseEntity(HttpStatus.CREATED);
+    }
 }
