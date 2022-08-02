@@ -8,9 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
 import javax.validation.Valid;
-import java.net.http.HttpResponse;
 import java.util.List;
 
 @Controller
@@ -20,9 +18,11 @@ public class UserController {
 
     private UserService userService;
 
-    @GetMapping("/all")
-    public List<User> getUsers() {
-        return userService.getAllUser();
+    @GetMapping
+    public List<User> getUsers(Model model) {
+        List<User> allUser = userService.getAllUser();
+        model.addAttribute("about",allUser);
+        return allUser;
     }
 
     @PostMapping
@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserByid(@PathVariable Long id) {
+    public User getUserByid( @PathVariable Long id) {
         return userService.getUserAbutId(id);
     }
 

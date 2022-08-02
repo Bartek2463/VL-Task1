@@ -37,6 +37,7 @@ public class User {
     @Column(name = "READ_ONLY")
     private String readOnly;
 
+
     @OneToMany(fetch = FetchType.EAGER,cascade = CascadeType.REFRESH,mappedBy = "user")
     private Set<Blog> blogs = new HashSet<>();
 }
