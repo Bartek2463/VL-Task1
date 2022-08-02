@@ -5,13 +5,10 @@ import com.example.vltask1.model.User;
 import com.example.vltask1.service.BlogService;
 import com.example.vltask1.service.UserService;
 import lombok.AllArgsConstructor;
-import org.apache.catalina.LifecycleState;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,14 +32,14 @@ public class BlogController {
     }
 
     @PostMapping
-    public ResponseEntity addBlog(@Valid Blog blog) {
+    public ResponseEntity addBlog( @RequestBody @Valid Blog blog) {
         blogService.addBlog(blog);
         return new ResponseEntity(HttpStatus.CREATED);
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity deleteBlog(Long id){
+    @DeleteMapping("/{id}")
+    public Long deleteBlog(Long id){
        blogService.deleteBlogById(id);
-       return new ResponseEntity(HttpStatus.CREATED);
+       return id;
     }
 }
